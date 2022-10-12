@@ -1,0 +1,143 @@
+DUMP_DBD v13 RELEASE NOTES 
+==========================
+
+dump_dbd is a Windows console application which can read dataTaker DT8x binary 
+data (.dbd) files.
+
+This software is provided with source code and is intended for use by 
+experienced developers. There is NO WARRANTY and technical support is limited, 
+which is why we provide the source code. The software is made available to you 
+with very few restrictions. You may use, modify, redistribute etc. Please see 
+the source code files for a full statement about what you may do with the 
+software.
+
+Copyright (c) 2005-2010 Thermo Fisher Scientific Australia Pty. Ltd.
+
+
+Usage
+-----
+
+dump_dbd is a Win32 console application and should be run in a Windows command 
+prompt window.
+
+dump_dbd [options] <infile(s)>
+
+ Options:  -v  verbose
+           -h  show headers only
+           -d  show data only
+           -a  show alarms only
+           -n  show column names (headings)
+           -i  ignore format spec in header
+
+Example:
+ dump_dbd -d -n data_a.dbd
+This will output data in CSV format, with column headings.
+
+
+Change History
+--------------
+
+
+Version 13    08-Sep-2010
+-------------------------
+
+- FIX: if a schedule contained a zero length data section then data for 
+subsequent schedules was not being read
+
+
+
+Version 12    17-Mar-2010
+-------------------------
+
+- ADD: now supports merged DBD format (DBD files containing multiple 
+jobs/schedules)
+
+
+
+Version 11    23-Dec-2009
+-------------------------
+
+- ADD: now supports extended (24 char) channel names
+
+- ADD: supports new style or old style display format string
+
+- CHANGE: "type" part of datapoint prefix no longer needs to match that in 
+channel map ("length" part still has to match). This allows a channel to contain 
+both integer and floating point values.
+
+- ADD: support for compiling under 32 and 64 bit Linux environments
+
+
+
+Version 10   19-Feb-2008
+------------------------
+
+- ADD: multiple input filename arguments may now be specified, as can wildcard 
+names, eg. "*.dbd". Matching files are processed sequentially and output is 
+concatenated. For "data only" options (-d, -a), a blank line is output between 
+each file's data.
+
+- ADD: prefix type 8 is now decoded as a "compact" data record (where datapoints 
+do NOT contain a timestamp offset).
+
+- CHANGE: timestamp and absolute time output format is now "y/m/d h:m:s.tttt" 
+(was "y/m/d,h:m:s.tttt")
+
+- CHANGE: relative time output format is now "h:m:s.tttt", where h can be >24 
+(was "d,h:m:s.tttt")
+
+- CHANGE: improved error and consistency checking to better handle corrupted DBD 
+files
+
+
+
+Version 9    16-Nov-2007
+------------------------
+
+- FIX: files with timezone set to "none" in header are now decoded properly
+
+
+
+Version 8    20-Sep-2007
+------------------------
+
+- FIX: possible crash when logged data includes string variables
+
+
+
+Version 7    03-Aug-2007
+------------------------
+
+- ADD: new option: -n
+Generates column headers, ie. first row of data/alarm section consists of 
+channel name/unit strings, eg: "1V (mV)", "Boiler temp (degC)"
+
+- CHANGE: in verbose mode (-v), timestamp offsets are now decoded and displayed 
+in seconds, eg:
+    0: 0861,2007/07/31,03:36:48.2655, 0811,T+0.0011,20.0
+
+- FIX: wasn't handling non NUL-terminated data/alarm strings properly. For 
+strings, we now ignore the format spec in the metadata ("%s") and always use 
+"%.*s", where * is the string length.
+
+- FIX: for time values which occupy two columns, special values eg "NotYetSet" 
+are now duplicated across both columns
+
+- FIX: add support for date-only and time-only formats for absolute time values
+
+- CHANGE: added comma between days and time parts of a relative time value so 
+that Excel can interpret it properly
+
+
+
+Version 6    13-Jun-2007
+------------------------
+
+- FIX: time interval values were not being displayed properly
+
+
+
+Version 5    07-Dec-2006
+------------------------
+
+Initial public release

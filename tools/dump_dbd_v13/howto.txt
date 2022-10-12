@@ -1,0 +1,9 @@
+compile cpp file with g++ or gcc
+
+execute ./a.out on .DBD file and pipe output to .txt or .csv
+
+example:
+
+./a.out -n path/to/file.DBD > path/to/file.txt
+
+option [-n] is for full output including header
