@@ -1,0 +1,4 @@
+# Position von Brunnen und Profilaufnahme mit Einträgen x [m], z [m] Oberfläche und x [m], z [m] Tiefe
+# x z
+5.005005005005005501e+02 -4.499977748928506571e+01
+5.005005005005005501e+02 -6.499977748928506571e+01
